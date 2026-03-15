@@ -57,7 +57,7 @@ O servidor mostra automaticamente os IPs disponíveis na rede:
 
 ## 📖 Modos de Jogo
 
-### Modo História (~20 minutos)
+### Modo História (~10 minutos)
 - **7 níveis** com ambientes diferentes
 - Abre com uma cutscene animada: o pai de careca como farol 🔦
 - Cada nível tem inimigos, moedas e um objetivo
@@ -74,9 +74,10 @@ O servidor mostra automaticamente os IPs disponíveis na rede:
 
 ## 🎨 Personagens
 
-- **Pip** — O protagonista. Criança aventureira perdida no bosque.
+- **Afonso** — O protagonista. Criança aventureira perdida no bosque.
 - **Mãe** — No topo da montanha, usa a lanterna com engenho.
 - **Pai** — A sua careca brilhante serve de farol para guiar o Pip! 👨‍🦲💡
+- **Lima** — Guardião e guia do Afonso
 - **Bichos laranja** — Inimigos que patrulham o chão.
 - **Cogumelos saltadores** — Inimigos que saltam de surpresa.
 
@@ -121,4 +122,4 @@ O servidor expõe uma API WebSocket simples para comunicação entre clientes:
 
 ---
 
-*Feito com ❤️ para crianças aventureiras*
+*Feito com ❤️ para putos aventureiros*
