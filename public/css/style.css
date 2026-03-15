@@ -1,0 +1,659 @@
+/* ═══════════════════════════════════════
+   O CAMINHO PARA CASA — Estilos
+   Estilo: Cartoon vibrante para crianças
+═══════════════════════════════════════ */
+
+:root {
+  --sky: #87CEEB;
+  --yellow: #FFD93D;
+  --orange: #FF6B35;
+  --green: #6BCB77;
+  --blue: #4D96FF;
+  --pink: #FF6B9D;
+  --purple: #9B5DE5;
+  --red: #FF4444;
+  --white: #FFFFFF;
+  --dark: #2D2D2D;
+  --ground: #8B5E3C;
+  --grass: #5DBB63;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+  background: var(--sky);
+  width: 100vw;
+  height: 100vh;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ─── SCREENS ─── */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.screen.active { display: flex; }
+
+/* ─── MENU PRINCIPAL ─── */
+#screen-menu {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  flex-direction: column;
+}
+
+.menu-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 4rem;
+  opacity: 0.15;
+  animation: floatCloud 20s linear infinite;
+}
+.cloud1 { top: 10%; animation-duration: 25s; font-size: 5rem; }
+.cloud2 { top: 35%; animation-duration: 35s; animation-delay: -10s; }
+.cloud3 { top: 60%; animation-duration: 28s; animation-delay: -5s; }
+
+@keyframes floatCloud {
+  from { transform: translateX(-200px); }
+  to   { transform: translateX(110vw); }
+}
+
+.star {
+  position: absolute;
+  font-size: 2rem;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.star1 { top: 15%; right: 20%; animation-delay: 0s; }
+.star2 { top: 45%; right: 10%; animation-delay: 1.5s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.3); }
+}
+
+.menu-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.title-wrap {
+  margin-bottom: 2.5rem;
+}
+
+.title-emoji {
+  font-size: 5rem;
+  display: block;
+  animation: bounce 2s ease-in-out infinite;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-15px); }
+}
+
+.game-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  color: var(--yellow);
+  line-height: 1.1;
+  text-shadow: 4px 4px 0 #b8860b, 0 0 30px rgba(255,217,61,0.5);
+  margin-bottom: 0.5rem;
+}
+
+.game-subtitle {
+  font-size: 1.2rem;
+  color: #aac4e8;
+  font-weight: 600;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* ─── BOTÕES ─── */
+.btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  padding: 0.9rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  min-width: 260px;
+  letter-spacing: 0.5px;
+}
+.btn:hover  { transform: translateY(-3px); }
+.btn:active { transform: translateY(1px); }
+
+.btn-story {
+  background: var(--yellow);
+  color: #5c3d00;
+  box-shadow: 0 6px 0 #b8860b, 0 8px 20px rgba(255,217,61,0.4);
+}
+.btn-story:hover { box-shadow: 0 8px 0 #b8860b, 0 12px 25px rgba(255,217,61,0.5); }
+.btn-story:active { box-shadow: 0 2px 0 #b8860b; }
+
+.btn-infinite {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 6px 0 #2255aa, 0 8px 20px rgba(77,150,255,0.4);
+}
+.btn-infinite:hover { box-shadow: 0 8px 0 #2255aa, 0 12px 25px rgba(77,150,255,0.5); }
+.btn-infinite:active { box-shadow: 0 2px 0 #2255aa; }
+
+.btn-controls {
+  background: var(--green);
+  color: white;
+  box-shadow: 0 6px 0 #3a8a42, 0 8px 20px rgba(107,203,119,0.4);
+}
+.btn-controls:hover { box-shadow: 0 8px 0 #3a8a42, 0 12px 25px rgba(107,203,119,0.5); }
+.btn-controls:active { box-shadow: 0 2px 0 #3a8a42; }
+
+.btn-download {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.25);
+  color: #aac4e8;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.4rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-download:hover { background: rgba(255,255,255,0.15); color: white; 
+  margin-top: 1rem;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.35);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: 0.55rem 1.4rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-install:hover { background: rgba(255,255,255,0.22); 
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.5);
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-pause:hover { background: rgba(255,255,255,0.35); }
+
+.btn-skip {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(255,255,255,0.25);
+  border: 2px solid rgba(255,255,255,0.6);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-skip:hover { background: rgba(255,255,255,0.4); }
+
+/* ─── REDE ─── */
+.network-info {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #aac4e8;
+}
+.dot { font-size: 1rem; color: #ff4444; transition: color 0.5s; }
+.dot.connected { color: var(--green); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+.player-badge {
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 0.2rem 0.7rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* ─── CUTSCENE ─── */
+#screen-cutscene {
+  background: #0a0a1a;
+  flex-direction: column;
+  gap: 0;
+}
+
+#cutsceneCanvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.cutscene-text {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  border: 3px solid var(--yellow);
+  border-radius: 20px;
+  padding: 1.2rem 2.5rem;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  text-align: center;
+  max-width: 80%;
+  min-width: 300px;
+  z-index: 10;
+  line-height: 1.4;
+  transition: opacity 0.5s;
+}
+
+/* ─── HUD ─── */
+#screen-game {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: #1a1a2e;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.2rem;
+  background: rgba(0,0,0,0.6);
+  border-bottom: 3px solid rgba(255,255,255,0.1);
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.hud-left, .hud-center, .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'Fredoka One', cursive;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.hud-hearts {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.hud-heart {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  transition: transform 0.15s, opacity 0.2s;
+}
+
+.hud-heart svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 4px rgba(255,60,100,0.7));
+}
+
+.hud-heart.empty svg {
+  filter: none;
+  opacity: 0.3;
+}
+
+.hud-heart.pulse {
+  animation: heartPulse 0.3s ease;
+}
+
+@keyframes heartPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.hud-score { color: var(--yellow); font-size: 1.3rem; }
+.hud-lives { color: var(--red); }
+.hud-level { color: #aac4e8; font-size: 0.9rem; }
+.hud-timer { color: var(--green); font-variant-numeric: tabular-nums; }
+
+#gameCanvas {
+  flex: 1;
+  width: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* ─── PAUSE ─── */
+.pause-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pause-box {
+  background: #1a1a2e;
+  border: 4px solid var(--yellow);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pause-box h2 {
+  font-family: 'Fredoka One', cursive;
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ─── CONTROLOS MOBILE ─── */
+.mobile-controls {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .mobile-controls { display: flex; justify-content: center; }
+}
+
+.mobile-row {
+  display: flex;
+  gap: 1rem;
+  pointer-events: all;
+}
+
+.mobile-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: 3px solid rgba(255,255,255,0.5);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-btn:active { background: rgba(255,255,255,0.5); }
+.mobile-jump {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,217,61,0.35);
+  border-color: var(--yellow);
+}
+
+/* ─── ECRÃS FINAIS ─── */
+#screen-end, #screen-gameover {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  flex-direction: column;
+}
+
+.end-content {
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.end-emoji {
+  font-size: 6rem;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.end-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--yellow);
+  text-shadow: 3px 3px 0 #b8860b;
+}
+
+.end-msg {
+  font-size: 1.2rem;
+  color: #aac4e8;
+  font-weight: 600;
+}
+
+.end-stats {
+  display: flex;
+  gap: 2rem;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1rem 2rem;
+}
+
+.stat {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.end-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+/* ─── CONTROLOS ECRÃ ─── */
+#screen-controls {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  flex-direction: column;
+}
+
+.controls-content {
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.controls-content h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.5rem;
+  color: var(--yellow);
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.control-item {
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.key {
+  background: var(--yellow);
+  color: #5c3d00;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+}
+
+.controls-note {
+  color: #aac4e8;
+  font-size: 1rem;
+}
+
+/* ─── ANIMAÇÕES DE ENTRADA ─── */
+.screen.active .menu-content { animation: fadeInUp 0.5s ease both; }
+.screen.active .end-content  { animation: fadeInUp 0.5s ease both; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.btn-about {
+  background: #9B5DE5;
+  color: white;
+  box-shadow: 0 6px 0 #6a3aaa, 0 8px 20px rgba(155,93,229,0.4);
+}
+.btn-about:hover { box-shadow: 0 8px 0 #6a3aaa, 0 12px 25px rgba(155,93,229,0.5); }
+.btn-about:active { box-shadow: 0 2px 0 #6a3aaa; }
+
+/* ─── SOBRE O JOGO ─── */
+#screen-about {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  flex-direction: column;
+  overflow-y: auto;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.about-content {
+  padding: 2rem 1.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.about-content h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--yellow);
+  text-shadow: 3px 3px 0 #b8860b;
+  text-align: center;
+}
+
+.about-tagline {
+  text-align: center;
+  color: #aac4e8;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: -0.6rem;
+}
+
+.about-section { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.about-section h3 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.about-card {
+  background: rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  color: #ccd8ee;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.about-card code {
+  background: rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.88rem;
+  color: #FFD93D;
+}
+
+.about-controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.about-key-item {
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.about-chars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.about-char {
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  color: #ccd8ee;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.about-footer {
+  text-align: center;
+  color: #667;
+  font-size: 0.85rem;
+  padding-bottom: 0.5rem;
+}
+
+@media (max-width: 420px) {
+  .about-chars { grid-template-columns: 1fr; }
+  .about-controls-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .controls-grid { grid-template-columns: 1fr; }
+  .end-stats { flex-direction: column; gap: 0.5rem; }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Caminho para Casa 🏠</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Caminho Casa">
+  <meta name="theme-color" content="#0a1628">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <!-- Fontes de sistema como fallback offline -->
+  <style>
+    @font-face {
+      font-family: 'Fredoka One';
+      src: local('Fredoka One'), local('FredokaOne-Regular');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Nunito';
+      src: local('Nunito'), local('Nunito-Regular');
+      font-display: swap;
+    }
+  </style>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- MENU PRINCIPAL -->
+  <div id="screen-menu" class="screen active">
+    <div class="menu-bg">
+      <div class="cloud cloud1">☁️</div>
+      <div class="cloud cloud2">☁️</div>
+      <div class="cloud cloud3">☁️</div>
+      <div class="star star1">⭐</div>
+      <div class="star star2">🌟</div>
+    </div>
+    <div class="menu-content">
+      <div class="title-wrap">
+        <div class="title-emoji">🏠</div>
+        <h1 class="game-title">O Caminho<br>para Casa</h1>
+        <p class="game-subtitle">Uma aventura de volta à família!</p>
+      </div>
+      <div class="menu-buttons">
+        <button class="btn btn-story" onclick="Game.startStory()">
+          📖 Modo História
+        </button>
+        <button class="btn btn-infinite" onclick="Game.startInfinite()">
+          ♾️ Modo Infinito
+        </button>
+        <button class="btn btn-controls" onclick="UI.showControls()">
+          🎮 Controlos
+        </button>
+        <button class="btn btn-about" onclick="UI.showAbout()">
+          ℹ️ Sobre o Jogo
+        </button>
+       
+        <a class="btn-download" href="/download" download="caminho-para-casa.html">
+          💾 Descarregar para jogar offline
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUTSCENE -->
+  <div id="screen-cutscene" class="screen">
+    <canvas id="cutsceneCanvas"></canvas>
+    <div id="cutsceneText" class="cutscene-text"></div>
+    <button class="btn-skip" onclick="Game.skipCutscene()">Saltar ▶</button>
+  </div>
+
+  <!-- JOGO -->
+  <div id="screen-game" class="screen">
+    <div class="hud">
+      <div class="hud-left">
+        <div class="hud-hearts" id="heartsDisplay"></div>
+        <span class="hud-level" id="levelDisplay">Nível 1</span>
+      </div>
+      <div class="hud-center">
+        <span class="hud-score">⭐ <span id="scoreDisplay">0</span></span>
+      </div>
+      <div class="hud-right">
+        <span class="hud-timer" id="timerDisplay">20:00</span>
+        <button class="btn-pause" onclick="Game.togglePause()">⏸</button>
+      </div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div id="pauseOverlay" class="pause-overlay" style="display:none">
+      <div class="pause-box">
+        <h2>⏸ Pausa</h2>
+        <button class="btn btn-story" onclick="Game.togglePause()">▶ Continuar</button>
+        <button class="btn btn-controls" onclick="UI.goMenu()">🏠 Menu</button>
+      </div>
+    </div>
+    <!-- Mobile controls -->
+    <div class="mobile-controls">
+      <div class="mobile-row">
+        <button class="mobile-btn" id="btnLeft" ontouchstart="Input.press('left')" ontouchend="Input.release('left')">◀</button>
+        <button class="mobile-btn mobile-jump" id="btnJump" ontouchstart="Input.press('jump')" ontouchend="Input.release('jump')">⬆</button>
+        <button class="mobile-btn" id="btnRight" ontouchstart="Input.press('right')" ontouchend="Input.release('right')">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECRÃ DE FIM (HISTÓRIA) -->
+  <div id="screen-end" class="screen">
+    <div class="end-content">
+      <div class="end-emoji" id="endEmoji">🏠</div>
+      <h2 class="end-title" id="endTitle">Chegaste a Casa!</h2>
+      <p class="end-msg" id="endMsg">O Pip está a salvo com a família!</p>
+      <div class="end-stats">
+        <div class="stat">⭐ <span id="finalScore">0</span> pontos</div>
+        <div class="stat">⏱ <span id="finalTime">0:00</span> minutos</div>
+      </div>
+      <div class="end-buttons">
+        <button class="btn btn-story" onclick="Game.startStory()">🔄 Jogar de Novo</button>
+        <button class="btn btn-infinite" onclick="Game.startInfinite()">♾️ Modo Infinito</button>
+        <button class="btn btn-controls" onclick="UI.goMenu()">🏠 Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECRÃ DE GAME OVER -->
+  <div id="screen-gameover" class="screen">
+    <div class="end-content">
+      <div class="end-emoji">😢</div>
+      <h2 class="end-title">Ops!</h2>
+      <p class="end-msg">O Pip caiu! Tenta outra vez!</p>
+      <div class="end-stats">
+        <div class="stat">⭐ <span id="goScore">0</span> pontos</div>
+      </div>
+      <div class="end-buttons">
+        <button class="btn btn-story" onclick="Game.retry()">🔄 Tentar de Novo</button>
+        <button class="btn btn-controls" onclick="UI.goMenu()">🏠 Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTROLOS -->
+  <div id="screen-controls" class="screen">
+    <div class="controls-content">
+      <h2>🎮 Controlos</h2>
+      <div class="controls-grid">
+        <div class="control-item"><span class="key">← →</span> Mover</div>
+        <div class="control-item"><span class="key">↑ / Espaço</span> Saltar</div>
+        <div class="control-item"><span class="key">P / Esc</span> Pausa</div>
+        <div class="control-item"><span class="key">Duplo salto</span> ↑↑ rápido</div>
+      </div>
+      <p class="controls-note">📱 No telemóvel usa os botões no ecrã!</p>
+      <button class="btn btn-story" onclick="UI.goMenu()">← Voltar</button>
+    </div>
+  </div>
+
+  <!-- SOBRE O JOGO -->
+  <div id="screen-about" class="screen">
+    <div class="about-content">
+      <h2>🏠 O Caminho para Casa</h2>
+      <p class="about-tagline">Platformer para crianças — Guia o Afonso de volta à família!</p>
+
+      <div class="about-section">
+        <h3>📖 Modos de Jogo</h3>
+        <div class="about-card">
+          <p><strong>Modo História (~10 min)</strong> — 7 níveis com ambientes diferentes. Abre com uma cutscene animada onde a careca do Pai serve de farol! 👨‍🦲💡 A dificuldade aumenta gradualmente.</p>
+        </div>
+        <div class="about-card">
+          <p><strong>Modo Infinito ♾️</strong> — Terreno gerado proceduralmente, para sempre. Pontuação por distância, paletes de cores aleatórias.</p>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h3>🎮 Controlos</h3>
+        <div class="about-controls-grid">
+          <div class="about-key-item"><span class="key">← →</span><span>Mover</span></div>
+          <div class="about-key-item"><span class="key">↑ / Espaço</span><span>Saltar</span></div>
+          <div class="about-key-item"><span class="key">↑ ↑</span><span>Duplo salto</span></div>
+          <div class="about-key-item"><span class="key">P / Esc</span><span>Pausa</span></div>
+        </div>
+        <p class="controls-note">📱 No telemóvel usa os botões no ecrã!</p>
+      </div>
+
+      <div class="about-section">
+        <h3>🎨 Personagens</h3>
+        <div class="about-chars">
+          <div class="about-char">👦 <strong>Afonso</strong> — o protagonista perdido no bosque</div>
+          <div class="about-char">👩 <strong>Mãe</strong> — usa a lanterna com engenho</div>
+          <div class="about-char">👨‍🦲 <strong>Pai</strong> — careca = farol</div>
+          <div class="about-char">🐱 <strong>Lima</strong> — o gato que ensina e acompanha</div>
+          <div class="about-char">🟠 <strong>Bichos</strong> — inimigos que patrulham</div>
+          <div class="about-char">🍄 <strong>Cogumelos</strong> — inimigos saltadores</div>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h3>🌐 Jogar em Rede Local</h3>
+        <div class="about-card">
+          <p>Inicia o servidor num computador com <code>npm start</code>. Os outros jogadores na mesma rede Wi-Fi ligam-se ao IP mostrado no terminal. Cada um joga a sua sessão — pontuações partilhadas em tempo real!</p>
+        </div>
+      </div>
+
+      <p class="about-footer">Feito com ❤️ para putos aventureiros</p>
+      <button class="btn btn-story" onclick="UI.goMenu()">← Voltar</button>
+    </div>
+  </div>
+
+  <script src="js/input.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/network.js"></script>
+  <script src="js/cutscene.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/entities.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    const PWA = (() => {
+      let deferredPrompt = null;
+
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isAndroid = /android/i.test(navigator.userAgent);
+      const isMobile = isIOS || isAndroid;
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                        || window.navigator.standalone === true;
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => {
+            // Forçar actualização imediata se houver nova versão
+            reg.update();
+          })
+          .catch(() => {});
+      }
+
+      // Indicar se está offline
+      function updateOnlineStatus() {
+        const connText = document.getElementById('connText');
+        if (!navigator.onLine && connText) {
+          connText.textContent = '📴 Offline (modo local)';
+        }
+      }
+      window.addEventListener('online',  () => { /* reconectar WS */ });
+      window.addEventListener('offline', updateOnlineStatus);
+      window.addEventListener('load', updateOnlineStatus);
+
+      // Se já estiver instalado, esconder o botão
+      if (isStandalone) {
+        window.addEventListener('load', () => hideInstallBtn());
+      }
+
+      // Android Chrome — botão automático
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault();
+        deferredPrompt = e;
+        showInstallBtn();
+      });
+
+      window.addEventListener('appinstalled', () => {
+        hideInstallBtn();
+        deferredPrompt = null;
+      });
+
+      function showInstallBtn() {
+        // Botão já visível no menu — esconder depois de instalar
+      }
+
+      function hideInstallBtn() {
+        const btn = document.getElementById('btnInstall');
+        if (btn) btn.style.display = 'none';
+      }
+
+      function install() {
+        if (deferredPrompt) {
+          // Android Chrome — prompt nativo
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+        } else if (isIOS) {
+          showIOSGuide();
+        } else {
+          showIOSGuide(); // outros browsers — mostrar guia genérico
+        }
+      }
+
+      function showIOSGuide() {
+        document.getElementById('installModal').style.display = 'flex';
+      }
+
+      return { install, showIOSGuide };
+    })();
+  </script>
+
+</body>
+</html>
