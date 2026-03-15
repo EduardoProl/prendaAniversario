@@ -27,8 +27,8 @@ const UI = (() => {
 
     const title = seconds < 900 ? 'Incrível! Chegaste a Casa!' : 'Chegaste a Casa!';
     const msg   = seconds < 600
-      ? 'O Pip está sã e salvo! Que aventureiro!'
-      : 'O Pip está a salvo com a família!';
+      ? 'O Afonso é um herói! Chegou a casa em tempo recorde!' 
+      : 'O Afonso está a salvo com a família!';
 
     document.getElementById('endTitle').textContent = title;
     document.getElementById('endMsg').textContent   = msg;
@@ -51,7 +51,11 @@ const UI = (() => {
     showScreen('about');
   }
 
-  return { showScreen, goMenu, showControls, showAbout, showEnd, init };
+  function confirmInfinite() {
+    document.getElementById('infiniteModal').style.display = 'flex';
+  }
+
+  return { showScreen, goMenu, showControls, showAbout, confirmInfinite, showEnd, init };
 })();
 
 // ── ARRANQUE ──

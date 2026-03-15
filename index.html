@@ -48,7 +48,7 @@
         <button class="btn btn-story" onclick="Game.startStory()">
           📖 Modo História
         </button>
-        <button class="btn btn-infinite" onclick="Game.startInfinite()">
+        <button class="btn btn-infinite" onclick="UI.confirmInfinite()">
           ♾️ Modo Infinito
         </button>
         <button class="btn btn-controls" onclick="UI.showControls()">
@@ -57,7 +57,6 @@
         <button class="btn btn-about" onclick="UI.showAbout()">
           ℹ️ Sobre o Jogo
         </button>
-       
       </div>
     </div>
   </div>
@@ -202,6 +201,28 @@
     </div>
   </div>
 
+  <!-- Aviso Modo Infinito -->
+  <div id="infiniteModal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;padding:1.5rem;">
+    <div style="background:#1a1a2e;border:3px solid #4D96FF;border-radius:20px;padding:2rem 1.8rem;max-width:360px;width:100%;text-align:center;font-family:'Nunito',sans-serif;">
+      <div style="font-size:3rem;margin-bottom:.5rem">🚧</div>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#FFD93D;margin-bottom:.8rem">Em Construção!</h2>
+      <p style="color:#aac4e8;font-size:1rem;line-height:1.6;margin-bottom:1.4rem">
+        O Modo Infinito ainda não está completo.<br>
+        Podem aparecer <strong style="color:white">bugs e falhas</strong> — jogues à tua conta e risco! 😄
+      </p>
+      <div style="display:flex;gap:.8rem;justify-content:center;">
+        <button onclick="document.getElementById('infiniteModal').style.display='none';Game.startInfinite();"
+          style="background:#4D96FF;border:none;color:white;font-family:'Fredoka One',cursive;font-size:1.1rem;padding:.7rem 1.5rem;border-radius:30px;cursor:pointer;flex:1;">
+          Jogar na mesma! ♾️
+        </button>
+        <button onclick="document.getElementById('infiniteModal').style.display='none';"
+          style="background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.3);color:white;font-family:'Fredoka One',cursive;font-size:1.1rem;padding:.7rem 1.5rem;border-radius:30px;cursor:pointer;flex:1;">
+          Voltar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/input.js"></script>
   <script src="js/tutorial.js"></script>
   <script src="js/audio.js"></script>
@@ -288,5 +309,36 @@
     })();
   </script>
 
+  <!-- Modal de instalação iOS / guia -->
+  <div id="installModal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);align-items:flex-end;justify-content:center;padding:1rem;">
+    <div style="background:#0d1f3a;border:2px solid #4D96FF;border-radius:20px;padding:1.8rem 1.5rem;max-width:380px;width:100%;text-align:center;font-family:'Nunito',sans-serif;color:white;margin-bottom:env(safe-area-inset-bottom,0px)">
+      <div style="font-size:3rem;margin-bottom:.5rem">📲</div>
+      <h2 style="font-family:'Fredoka One',cursive;font-size:1.6rem;color:#FFD93D;margin-bottom:.8rem">Instalar o Jogo</h2>
+      <p style="font-size:.95rem;color:#aac4e8;margin-bottom:1.2rem;line-height:1.5">Instala o jogo no teu telemóvel para jogar offline, sem precisar do servidor!</p>
+
+      <div style="background:rgba(255,255,255,0.07);border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:left">
+        <p style="font-weight:800;color:#FFD93D;margin-bottom:.6rem">🍎 iPhone / iPad (Safari)</p>
+        <p style="font-size:.9rem;line-height:1.7;color:#cce">
+          1. Toca em <strong style="color:white">⬆️ Partilhar</strong> (botão no fundo do Safari)<br>
+          2. Desliza e toca em <strong style="color:white">"Adicionar ao ecrã principal"</strong><br>
+          3. Toca em <strong style="color:white">"Adicionar"</strong> no canto superior direito
+        </p>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.07);border-radius:12px;padding:1rem;margin-bottom:1.2rem;text-align:left">
+        <p style="font-weight:800;color:#6BCB77;margin-bottom:.6rem">🤖 Android (Chrome)</p>
+        <p style="font-size:.9rem;line-height:1.7;color:#cce">
+          1. Toca nos <strong style="color:white">⋮ três pontos</strong> no canto superior direito<br>
+          2. Toca em <strong style="color:white">"Adicionar ao ecrã principal"</strong><br>
+          3. Confirma com <strong style="color:white">"Adicionar"</strong>
+        </p>
+      </div>
+
+      <button onclick="document.getElementById('installModal').style.display='none'"
+        style="background:#4D96FF;border:none;color:white;font-family:'Fredoka One',cursive;font-size:1.1rem;padding:.7rem 2rem;border-radius:30px;cursor:pointer;width:100%">
+        Entendido! ✓
+      </button>
+    </div>
+  </div>
 </body>
 </html>
